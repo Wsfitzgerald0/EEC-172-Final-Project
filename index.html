@@ -1234,73 +1234,24 @@
   and updates the score count, incrementing the player’s score if the game ended via UART transmission,
   or incrementing the opponent’s score if the game ended through internal logic (ball hitting paddle).</p>
 
-
-
+<h2 id="project-deliverables">Challenges</h2>
+<p>We did not encounter many serious challenges in implementing this project. We attribute 
+  this to our prior experience working with most of the components of this project.</p>
+<p>One challenge that we did encounter was in configuring the pins on our microcontroller
+  so that the various methods of communication would work. We were able to solve this problem
+  by reading the documentation on the launchpad and determining which pins needed to be configured
+  for specific communication methods, and then setting all of the remaining pins that we needed
+  after that. </p>
+<p>In addition to this, we had some trouble implementing UART2 communication when sending balls
+  between the boards. We initially had an error where the UART2 interrupt handler would incorrectly
+  be called anytime a UART2 message was sent. We were able to fix this issue by changing our
+  methodology for triggering the UART buffer to be sent.</p>
+<p>Finally, we had some issue with Amazon Web Services not functioning properly when
+  our program was flashed, but we were able to resolve this by configuring the program’s
+  network settings.</p>
 
 
   
-<h2 id="project-deliverables">Project Deliverables</h2>
-<h3 id="in-class-presentation">In-class Presentation</h3>
-<p>During the last 2 (extended) lectures, each group will give a short,
-4-min presentation of their project on zoom which should cover the
-following:</p>
-<ul>
-<li><strong>Description of the Project Objectives</strong>
-<em><strong>(1 slide - 2 points)</strong></em>
-<ul>
-<li>quick description of your project
-<ul>
-<li>e.g. "we are designing ___ with features ___ "</li>
-</ul></li>
-<li>similar existing products and notable differences from your proposal
-<ul>
-<li>e.g. "some existing similar products are ___ . our's is different
-because ___ "</li>
-</ul></li>
-</ul></li>
-<li><strong>Block diagram of tasks or modules, and their logical
-relationships</strong> <em><strong>(1-2 slide(s) - 4
-point)</strong></em>
-<ul>
-<li>Breakdown the objective into smaller tasks or modules; visualize
-their dependency and/or data or control flow among them</li>
-<li>Use color coding to show the team member leading the work on each
-task</li>
-</ul></li>
-<li><strong>Progress report</strong> <em><strong>(1-2 slide(s) - 4
-point)</strong></em>
-<ul>
-<li>Status of all tasks (completed, in-progress, planned, etc.)
-<ul>
-<li>For in-progress or future tasks, give a sense of expected timeline
-to finish &amp; integrate.</li>
-</ul></li>
-<li>A very short (partial) demo video to give a sense of completed
-tasks</li>
-</ul></li>
-</ul>
-<p><strong>Each of the above requirements will be graded on 2
-criteria</strong>:</p>
-<ul>
-<li><em>Clarity</em>: the presentation is clear and understandable</li>
-<li><em>Quality</em>: the content is professional and
-well-organized</li>
-</ul>
-<p>Because we have many presentations that we need to get through and a
-total of 2 hours for all ~45 groups to present, out of respect for your
-fellow classmates, <em><strong>presentations will be hard-capped at 4
-minutes</strong></em>. <strong>If you are unable to cover all the
-content requirements, any requirements not discussed at all will receive
-a 0</strong>. The discussion of each requirement does not need to be
-done in-depth, so long as it conveys the major points (don't spend time
-on implementation details or thought process, simply report the results
-or final decisions).</p>
-<p><strong>Please practice your presentation beforehand to ensure that
-you are within the time limit.</strong></p>
-<blockquote>
-<p>Note: Presentation score will be weighted to be worth a total of 7.5
-points relative to the entire final project grade out of 100.</p>
-</blockquote>
 <h3 id="written-final-report">Written Final Report</h3>
 <p>The final project report should thoroughly document your project and
 provide enough information that your project can be reproduced. You
