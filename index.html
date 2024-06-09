@@ -1155,6 +1155,23 @@
   player scores to them via Amazon Web Services when the game has completed.</p>
 
 <h2 id="project-proposal-and-bill-of-materials">Design</h2>
+<p>Below we see the state machine for our application without going into gameplay 
+  details. We see that players initially view a start screen, and 
+  after any button press are navigated to a settings screen where 
+  they can modify settings. Following the settings screen, players play a number 
+  of game they have selected, and after that their scores are sent and they view a 
+  game over screen with the possibility of replaying their matches.</p>
+<p>Below we see a state diagram for the gameplay of OLED battle. When the games begin, 
+  paddles are displayed on the screen and interrupt handlers are registered and enabled. 
+  After this, the game enters a loop where it updates the player’s location and status 
+  followed by the ball or bullets locations until a player is struck by a ball.</p>
+<p>Below we have our system architecture view. In our architecture, user’s interface with 
+  their own launchpad microcontroller using button presses on the controller, sending 
+  signals with a remote that is picked up by an infrared sensor, and by tilting the 
+  controller. Players receive feedback from the devices mainly through the OLED’s 
+  display, but also through amazon’s IoT. In addition to this, the two launchpads 
+  communicate with each other by sending messages over UART.</p>
+  
 <ol type="1">
 <li><strong>Description</strong> <em><strong>(2 points)</strong></em>
 <ul>
