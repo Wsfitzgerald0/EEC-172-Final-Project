@@ -1172,108 +1172,36 @@
   display, but also through amazon’s IoT. In addition to this, the two launchpads 
   communicate with each other by sending messages over UART.</p>
   
-<ol type="1">
-<li><strong>Description</strong> <em><strong>(2 points)</strong></em>
-<ul>
-<li>a description of the product you intend to prototype</li>
-</ul></li>
-<li><strong>Design</strong>
-<ol type="1">
-<li><em>Functional Specification</em> <em><strong>(2
-points)</strong></em>
-<ul>
-<li>a state machine diagram and written description of the high-level
-behavior of your product</li>
-</ul></li>
-<li><em>System Architecture</em> <em><strong>(2 points)</strong></em>
-<ul>
-<li>an architectural block diagram and written description of how each
-component or service will fit together in the system</li>
-</ul></li>
-</ol></li>
-<li><strong>Implementation Goals</strong> <em><strong>(2
-points)</strong></em>
-<ul>
-</ul></li>
-<li><strong>Bill of Materials</strong> <em><strong>(2
-points)</strong></em>
-<ul>
-<li>a list of all anticipated materials and components for the
-prototype, their cost, and where they can be obtained.</li>
-</ul></li>
-</ol>
-<p><strong>The proposal should be at least 1 page and no more than 2
-pages (excluding the BOM).</strong></p>
-<blockquote>
-<p>Note: Your score out of 10 on the proposal will be scaled to 5% as
-described in the overview.</p>
-</blockquote>
-<h2 id="live-demonstration-and-verification">Live Demonstration and
-Verification</h2>
-<p><strong>During their last lab section of the quarter, all groups will
-present their prototypes live for verification and judging for the best
-project award.</strong></p>
-<p><strong>Prototypes will be graded based on functionality, complexity,
-and aesthetics/production quality, which are tied to the implementation
-goals that were established.</strong></p>
-<p>Scores will be assigned according to the following rubric with some
-variation within the bins.</p>
-<table>
-    <tbody><tr>
-        <th>Criteria</th>
-        <th>Exemplary [100%, 90%]</th>
-        <th>Satisfactory (90%, 70%]</th>
-        <th>Unsatisfactory (70%, 60%]</th>
-        <th>Failing (60, 0%]</th>
-    </tr>
-    <tr>
-        <!-- Criteria -->
-        <td>Functionality (20 points)</td>
-        <!-- Exemplary -->
-        <td>Live demonstration is fully standalone and interactive, with few or no 
-            issues during demonstration. Prototype interaction is smooth and responsive</td>
-        <!-- Satisfactory -->
-        <td>Live demonstration is fully standalone, with at most 1 major issue 
-            during demonstration. Prototype interaction is mostly responsive</td>
-        <!-- Unsatisfactory -->
-        <td>Live demonstration is not standalone, with multiple major issues 
-            during demonstration. Prototype interaction is only intermittently responsive</td>
-        <!-- Failing -->
-        <td>Live demonstration is unresponsive, protoype is incomplete, or non-existent.</td>
-    </tr>
-    <tr>
-        <!-- Criteria -->
-        <td>Complexity (20 points)</td>
-        <!-- Exemplary -->
-        <td>Live demonstration meets all target goals and a significant number of stretch goals.
-            All design specs are met and project showcases interesting and unique features. (e.g. 
-            control systems, new/custom web APIs, algorithms, etc.). Project difficulty significantly
-            harder than lab 3 and 4.</td>
-        <!-- Satisfactory -->
-        <td>Live demonstration meets all target goals. All design specs are met. Project difficulty
-            is comparable to lab 3 or 4</td>
-        <!-- Unsatisfactory -->
-        <td>Live demonstration meets all minimal goals. At most 1 design specification is not
-            met. Project difficulty is comparable to lab 2.</td>
-        <!-- Failing -->
-        <td>Live demonstration is unresponsive, protoype is incomplete, or non-existent. 
-            Project difficulty is comparable to lab 1 or 2.</td>
-    </tr>
-    <tr>
-        <!-- Criteria -->
-        <td>Production Quality (10 points)</td>
-        <!-- Exemplary -->
-        <td>Live demonstration has a well thought-out and intuitive user interaction model and
-            has a aesthetically appealing user interface (UI) and/or form factor. 
-            Prototype circuitry and wires are well-organized.</td>
-        <!-- Satisfactory -->
-        <td>Live demonstration has an acceptable user interaction model and practical UI.</td>
-        <!-- Unsatisfactory -->
-        <td>Live demonstration has a convoluted user interaction model or impractical UI.</td>
-        <!-- Failing -->
-        <td>Live demonstration has extremely impractical user intraction model or UI.</td>
-    </tr>
-</tbody></table>
+<h2 id="live-demonstration-and-verification">Implementation</h2>
+<p>Below is the circuit schematic for our project. Our microcontroller 
+  interfaces with the OLED screen and the IR receiver, both off-board peripherals. 
+  It also communicates with the other player’s microcontroller using UART.</p>
+<p>The program starts by initializing the board, all the relevant pins, SysTick, 
+  the protocols SPI and I2C, and finally connects to the AWS server. We used the 
+  same initialization settings for SPI and I2C from previous labs since we aren’t 
+  using any new sensors. We configured our microcontroller to FIFO mode for UART 
+  and set its level to 4 characters. All of our transmissions fit within under 4 
+  characters; transmission under 4 characters are padded.</p>
+<p>The start screen is the first thing the players see when they start or restart
+  the game. It is a static screen that is coded to respond to any signal
+  from the TV remote.</p>
+<p>After leaving the start screen, the program enters the settings screen. While
+  on this screen, the program responds to signals from the TV remote by decoding
+  it into bits, storing it into an array, and passing it through a switch case statement
+  to check the remote’s key presses.</p>
+<p>The only two key presses the program responds to are 2, 8, and 5, which we designated
+  as up, down, and confirm respectively. If 2 and 8 are pressed, a variable indicating
+  the position of the cursor is incremented or decremented.</p>
+<p>The program behaves differently depending on where the cursor is when the key 5 is
+  pressed: if it is hovering over the start button, it initiates the game, otherwise
+  it sets a global variable reflecting the number of matches to be played from the
+  displayed option.</p>
+<p>When the game starts, the program initializes global variables for the player’s state,
+  the player’s score, a struct list containing all bullets on the player’s screen, and
+  integer tracking the number of bullets on screen, and the current number of rounds played.
+  It enters a while loop that only breaks when either player has been struck by a bullet.
+  In every iteration of this loop, the program reads in values from the on-board sensors:
+  the accelerometer and the two push buttons located on the bottom of the board.</p>
 
 <h2 id="project-deliverables">Project Deliverables</h2>
 <h3 id="in-class-presentation">In-class Presentation</h3>
