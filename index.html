@@ -1202,7 +1202,43 @@
   It enters a while loop that only breaks when either player has been struck by a bullet.
   In every iteration of this loop, the program reads in values from the on-board sensors:
   the accelerometer and the two push buttons located on the bottom of the board.</p>
+<p>The accelerometer modifies the player paddle character’s x-velocity, allowing it to move
+  along the x-direction at a set y-position.</p>
+<p>The paddle has three possible states: ready-to-fire, invulnerability, and default. Pushing
+  the right button on the microcontrollers takes the player from ready-to-fire to default.
+  Pushing the left button changes the state from default to invulnerable.</p>
+<p>When a player’s state changes from ready-to-fire to default, a bullet is added on the top
+  of their screen at the same x-position as the paddle. It travels towards the player at the
+  default vertical velocity. When the player’s state is invulnerable, the paddle deflects
+  the bullet when it collides with the paddle.</p>
+<p>The general behavior for all game objects is that its new position is updated by adding
+  its current position with its x and y velocities. If the new position falls outside the
+  screen’s vertical borders, the program prevents the object from traveling there either
+  by reflecting its velocity in the case of bullets, or simply just setting the new position
+  of the object such that it sits on the edge of the interior border.</p>
+<p>The rest of the gameplay’s mechanics are coded into the bullet object’s behavior.
+  If it strikes the player’s paddle while the player is invulnerable, it will be reflected.
+  Its y-velocity will change signs, and the x-velocity will be determined from the following equation:</p>
+<p>If a bullet hits the bottom side of the screen, it will be deleted. If it hits the top side of the screen,
+  it will be deleted, and a UART transmission encoding the bullet’s position and velocity will be sent to the
+  other microcontroller. If a bullet strikes the player’s paddle while it is not invulnerable, the round will end,
+  and a transmission will be sent over UART informing the other microcontroller that the round is over.</p>
+<p>Lastly, the game checks for colliding bullets by looping through the bullet list and checking the
+  new position (sum of current position and new velocity) against that of every other bullet.
+  If the positions fall within twice the bullets radius, then a collision has occurred,
+  and both bullets will reverse the sign of their velocity.</p>
+<p>When the round ends, the game checks to see if the number of rounds played is equal to the total
+  number of rounds in the game. If it is, the game displays a game over screen, finalizes the game’s
+  score, and sends it to the AWS IoT server, which will then use SNS to send an email to the player
+  with the game’s score. If there are more rounds to be played, the game resets all gameplay variables,
+  and updates the score count, incrementing the player’s score if the game ended via UART transmission,
+  or incrementing the opponent’s score if the game ended through internal logic (ball hitting paddle).</p>
 
+
+
+
+
+  
 <h2 id="project-deliverables">Project Deliverables</h2>
 <h3 id="in-class-presentation">In-class Presentation</h3>
 <p>During the last 2 (extended) lectures, each group will give a short,
