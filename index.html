@@ -1164,21 +1164,32 @@
   they can modify settings. Following the settings screen, players play a number 
   of game they have selected, and after that their scores are sent and they view a 
   game over screen with the possibility of replaying their matches.</p>
+
+<img src="block_diagram.png" style="width:7in;height:auto">
+
 <p>Below we see a state diagram for the gameplay of OLED battle. When the games begin, 
   paddles are displayed on the screen and interrupt handlers are registered and enabled. 
   After this, the game enters a loop where it updates the player’s location and status 
   followed by the ball or bullets locations until a player is struck by a ball.</p>
+
+<img src="flowchart.png" style="width:7in;height:auto">
+
 <p>Below we have our system architecture view. In our architecture, user’s interface with 
   their own launchpad microcontroller using button presses on the controller, sending 
   signals with a remote that is picked up by an infrared sensor, and by tilting the 
   controller. Players receive feedback from the devices mainly through the OLED’s 
   display, but also through amazon’s IoT. In addition to this, the two launchpads 
   communicate with each other by sending messages over UART.</p>
-  
+
+<img src="system.png" style="width:7in;height:auto">
+
 <h2 id="live-demonstration-and-verification">Implementation</h2>
 <p>Below is the circuit schematic for our project. Our microcontroller 
   interfaces with the OLED screen and the IR receiver, both off-board peripherals. 
   It also communicates with the other player’s microcontroller using UART.</p>
+
+<img src="schematic.png" style="width:5in;height:auto">
+
 <p>The program starts by initializing the board, all the relevant pins, SysTick, 
   the protocols SPI and I2C, and finally connects to the AWS server. We used the 
   same initialization settings for SPI and I2C from previous labs since we aren’t 
@@ -1222,6 +1233,9 @@
 <p>The rest of the gameplay’s mechanics are coded into the bullet object’s behavior.
   If it strikes the player’s paddle while the player is invulnerable, it will be reflected.
   Its y-velocity will change signs, and the x-velocity will be determined from the following equation:</p>
+
+<img src="eq1.png" style="width:3in;height:auto">
+
 <p>If a bullet hits the bottom side of the screen, it will be deleted. If it hits the top side of the screen,
   it will be deleted, and a UART transmission encoding the bullet’s position and velocity will be sent to the
   other microcontroller. If a bullet strikes the player’s paddle while it is not invulnerable, the round will end,
