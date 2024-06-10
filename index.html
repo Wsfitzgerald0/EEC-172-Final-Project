@@ -1165,14 +1165,14 @@
   of game they have selected, and after that their scores are sent and they view a 
   game over screen with the possibility of replaying their matches.</p>
 
-<img src="![a](./assets/block_diagram.png)" style="width:7in;height:auto">
+<img src="https://raw.githubusercontent.com/Wsfitzgerald0/EEC-172-Final-Project/main/docs/assets/block_diagram.png" style="width:7in;height:auto">
 
 <p>Below we see a state diagram for the gameplay of OLED battle. When the games begin, 
   paddles are displayed on the screen and interrupt handlers are registered and enabled. 
   After this, the game enters a loop where it updates the player’s location and status 
   followed by the ball or bullets locations until a player is struck by a ball.</p>
 
-<img src="![b](./assets/flowchart.png)" style="width:7in;height:auto">
+<img src="https://raw.githubusercontent.com/Wsfitzgerald0/EEC-172-Final-Project/main/docs/assets/flowchart.png" style="width:7in;height:auto">
 
 <p>Below we have our system architecture view. In our architecture, user’s interface with 
   their own launchpad microcontroller using button presses on the controller, sending 
@@ -1181,14 +1181,14 @@
   display, but also through amazon’s IoT. In addition to this, the two launchpads 
   communicate with each other by sending messages over UART.</p>
 
-<img src="![c](./assets/system.png)" style="width:7in;height:auto">
+<img src="https://raw.githubusercontent.com/Wsfitzgerald0/EEC-172-Final-Project/main/docs/assets/system.png" style="width:7in;height:auto">
 
 <h2 id="live-demonstration-and-verification">Implementation</h2>
 <p>Below is the circuit schematic for our project. Our microcontroller 
   interfaces with the OLED screen and the IR receiver, both off-board peripherals. 
   It also communicates with the other player’s microcontroller using UART.</p>
 
-<img src="![d](./assets/schematic.png)" style="width:5in;height:auto">
+<img src="https://raw.githubusercontent.com/Wsfitzgerald0/EEC-172-Final-Project/main/docs/assets/schematic.png" style="width:5in;height:auto">
 
 <p>The program starts by initializing the board, all the relevant pins, SysTick, 
   the protocols SPI and I2C, and finally connects to the AWS server. We used the 
@@ -1234,7 +1234,7 @@
   If it strikes the player’s paddle while the player is invulnerable, it will be reflected.
   Its y-velocity will change signs, and the x-velocity will be determined from the following equation:</p>
 
-<img src="![e](./assets/eq1.png)" style="width:2in;height:auto">
+<img src="https://raw.githubusercontent.com/Wsfitzgerald0/EEC-172-Final-Project/main/docs/assets/eq1.png" style="width:2in;height:auto">
 
 <p>where vx is the bullet’s x-velocity, x' is the paddle’s x-position, w is the paddle’s width, and x0 is the bullet’s initial x-position.</p>
 
